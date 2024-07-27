@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Istok Web
+- Font Author: Copyright (c) 2008-2014, Andrey V. Panov (panov@canopus.iacp.dvo.ru), with Reserved Font Name Istok
+- Font Source: https://fonts.gstatic.com/s/istokweb/v24/3qTvojGmgSyUukBzKslZAWF-9kIIaQ.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

@@ -1,0 +1,93 @@
+{% extends 'trading/layout.html' %}
+
+{% block body %}
+    <script>
+        function oneMonth() {
+            document.getElementById("1yrbtn").className = "btn btn-dark"
+            document.getElementById("oneYr").style.display = "none"
+            document.getElementById("6mobtn").className = "btn btn-dark"
+            document.getElementById("6mo").style.display = "none"
+            document.getElementById("1mo").style.display = "block"
+            document.getElementById("1mobtn").className = "btn btn-outline-secondary"
+        }
+
+        function sixMonths() {
+            document.getElementById("1yrbtn").className = "btn btn-dark"
+            document.getElementById("oneYr").style.display = "none"
+            document.getElementById("6mobtn").className = "btn btn-outline-secondary"
+            document.getElementById("6mo").style.display = "block"
+            document.getElementById("1mobtn").className = "btn btn-dark"
+            document.getElementById("1mo").style.display = "none"
+        }
+
+        function oneYr() {
+            document.getElementById("oneYr").style.display = "block"
+            document.getElementById("1yrbtn").className = "btn btn-outline-secondary"
+            document.getElementById("6mobtn").className = "btn btn-dark"
+            document.getElementById("6mo").style.display = "none"
+            document.getElementById("1mobtn").className = "btn btn-dark"
+            document.getElementById("1mo").style.display = "none"
+        }
+
+    </script>
+    <div style = "text-align: center;">
+        <h1>{{ info.shortName }}</h1>
+        <h2>${{ info.currentPrice }}</h2>
+        <div class = "container">
+            <div>
+                <div class = "btn-group">
+                    <button id = "1mobtn"type="button" class="btn btn-dark" onclick="oneMonth()">1 Month</button>
+                    <button id = "6mobtn" type="button" class="btn btn-dark" onclick= "sixMonths()">6 Months</button>
+                    <button id = "1yrbtn" type="button" class="btn btn-outline-secondary" onclick="oneYr()">1 Year</button>
+                </div>
+                <div class = "graph-container" id = "oneYr">
+                    {{ oneYr|safe }}
+                </div>
+                <div class = "graph-container" id = "6mo" style = "display: none;">
+                    {{ sixMo|safe }}
+                </div>
+                <div class = "graph-container" id = "1mo" style = "display: none;">
+                    {{ oneMo|safe }}
+                </div>
+            </div>
+            <div>
+                <div>
+                    <form action = "{% url 'buy' %}" method = "POST">
+                        {% csrf_token %}
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-8 my-1">
+                            <label class="sr-only" for="inlineFormInputName">Name</label>
+                            <input name = "shares" type="number" min = "1" class="form-control" id="inlineFormInputName" required>
+                            <input name = "ticker" type = "hidden" value = "{{ info.symbol }}">
+                            <input name = "price" type = "hidden" value = "{{ info.currentPrice }}">
+                            </div>
+                            <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-primary">Buy</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% if currentShares != 0 %}
+                    <form action = "{% url 'sell' %}" method = "POST">
+                        {% csrf_token %}
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-8 my-1">
+                            <label class="sr-only" for="inlineFormInputName">Name</label>
+                            <input name = "shares" type="number" min = "1" max = "{{ currentShares }}" class="form-control" id="inlineFormInputName" required>
+                            <input name = "ticker" type = "hidden" value = "{{ info.symbol }}">
+                            <input name = "price" type = "hidden" value = "{{ info.currentPrice }}">
+                            </div>
+                            <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-primary">Sell</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <p style = "margin: 30px; display: inline-block;">{{ info.longBusinessSummary }}</p>
+
+
+
+{% endblock %}

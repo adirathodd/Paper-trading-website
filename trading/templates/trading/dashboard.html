@@ -1,0 +1,36 @@
+{% extends 'trading/layout.html' %}
+{% load custom_filters %}
+{% block body %}
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Stock</th>
+        <th scope="col">Share(s)</th>
+        <th scope="col">Value</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Cash</th>
+            <td></td>
+            <td>{{ request.user.balance|usd_format }}</td>
+            <td></td>
+        </tr>
+        {% for share in shares reversed %}
+        <tr>
+            <th><a href="{% url 'search' %}?ticker={{ share.stock }}" class="stock-button">{{ share.stock }}</a></th>
+            <td>{{ share.shares }}</td>
+            <td>{{ share.currentValue|usd_format }}</td>
+            <td>{{ share.updated_at }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th>Total Account Value</th>
+            <td></td>
+            <td>{{ total|usd_format }}</td>
+            <td></td>
+        </tr>
+  </table>
+{% endblock %}
