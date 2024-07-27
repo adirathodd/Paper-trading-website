@@ -1,3 +1,7 @@
+# Website Link
+
+https://adirathodd.pythonanywhere.com/
+
 # Distinctiveness and Complexity:
 
 My project is significatnly different from the rest of the projects such as the e-commerce website since it uses something never used before. I take advantage of 
@@ -11,8 +15,3 @@ and the default that will be shown is the 1 year chart. The page also gives a sl
 
 In the app called trading, there is a folder named 'templates' which contain all of the HTML files for the web application. The files are dashboard, layout, login, register, and search. Dashboard is the home page of the user if logged in and search is to show the summary of a
 stock when it is search for from search bar. The layout file contains the top bar for the entire website which changes depending on if a user is logged in or not. The login file is for logging the user in and the register file is the page for registering a new user. Lastly, the search file is a page that changes based on which stock the user searches. This file uses information from the views.py file to obtain data about the stock in question and then presents a small summary. If the user possesses the stock, it will show a sell button which I implemented using an 'if' statement. The maximum number of shares they can sell is limited to the amount of shares they have to avoid any errors. The search function from views.py gives the page three different graphs of the stock and the 1 year graph is shown by default and the 6 month and 1 month grpahs ares hidden by default. There are buttons for each graph above the graph which use javascript to show the graph clicked on by the user and hiding the other graphs. The static folder contains a style.css file for styling purposes for the login and register page and also the size of the graphs in the search page. Admin.py contains all of the access the superuser has which is User and Transaction. This allows the admin to make any change he or she wants to any transaction or user. Apps.py was used to register the trading app. Models.py has my two models User and Transaction. In addition to the default information, I added a balance field which has a default value of 10,000 which is the strarting cash balance for all users. Urls.py contains the different paths of this app such as login, logout, register, search, buy and sell which all use its corresponding function found in the Views.py . Views.py contains all of the python code to render and perform different functions such as buying, selling, and showing the dashboard. Db.sqlite3 contains all of the information of the users and transactions.
-
-# How To Run
-Run the command "python3 manage.py runserver" in the terminal and click on the given link.
-Then register using a valid email address, username, and a password at least 8 characters long.
-# Paper-trading-website
