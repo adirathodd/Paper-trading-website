@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +29,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_5qny@@4!all$r_#sk$m8^c1=(6lnzyzwk6rinsyb26#vt)nhl'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
+DB_PASSWORD = config('DATABASE_PASSWORD')
+EMAIL_PASSWORD = config('SEC_EMAIL_HOST_PASSWORD')
 EMAIL_FROM_USER = 'titanpapertrading@gmail.com'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -92,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'adirathodd$default',
         'USER': 'adirathodd',
-        'PASSWORD': 'James007!',
+        'PASSWORD': DB_PASSWORD,
         'HOST': 'adirathodd.mysql.pythonanywhere-services.com',
     }
 }
@@ -148,4 +153,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'titanpapertrading@gmail.com'
-EMAIL_HOST_PASSWORD = 'upgnwludzoobquau'
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
